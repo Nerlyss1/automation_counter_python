@@ -21,5 +21,4 @@ deploy-app-job:
   stage: deploy-app
   script:
     - chmod 400 $SSH_PRIVATE_KEY
-    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no nerlyss@192.168.198.143 "docker run --name counter_app -d -p 8080:80 nerlyss411/ynov_lea_ipti_counter_app_img:$CI_COMMIT_SHORT_SHA"
-   #'docker rm -f counter_app || true && docker rm -f webserver-devops
+    - ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no nerlyss@192.168.198.143 "docker rm -f counter_app || true && docker run --name counter_app -d -p 8080:5000 nerlyss411/ynov_lea_ipti_counter_app_img:$CI_COMMIT_SHORT_SHA"
