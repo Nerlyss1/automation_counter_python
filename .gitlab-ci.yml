@@ -20,7 +20,7 @@ publish-image-job:
 deploy-app-job:
   stage: deploy-app
   script:
-    - mkdir -p ~/.ssh
+    - mkdir -p $HOME:/.ssh && touch $HOME:/.ssh/id_rsa
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > $HOME:/.ssh/id_rsa
     - chmod 400 /home/gitlab-runner/.ssh/id_rsa
     - ssh -i /home/gitlab-runner/.ssh/id_rsa -o StrictHostKeyChecking=no nerlyss@192.168.198.143
