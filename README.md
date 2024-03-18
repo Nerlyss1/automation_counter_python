@@ -37,7 +37,7 @@ Ensure the following variables are set up in your GitLab project:
 
 1. `DOCKERHUB_LOGIN`: Your Docker Hub username.
 2. `DOCKERHUB_PASSWORD`: Your Docker Hub password.
-3. `SSH_PASSWORD`: Password for SSH authentication to the `dev-srv` machine.
+3. `SSH_PRIVATE_KEY`: Key file for SSH authentication to the `dev-srv` machine.
 
 ## Running the Project
 
