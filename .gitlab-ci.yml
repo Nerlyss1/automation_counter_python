@@ -6,6 +6,7 @@ stages:
 build-image-job:      
   stage: build-image
   script:
+   - docker rm -f ynov_lea_ipti_counter_app_img || true
     - docker build -t ynov_lea_ipti_counter_app_img .
     - docker images
 
@@ -13,7 +14,7 @@ publish-image-job:
   stage: publish-image
   script:
     - docker tag ynov_lea_ipti_counter_app_img nerlyss411/ynov_lea_ipti_counter_app_img:$CI_COMMIT_SHORT_SHA
-    - echo "$DOCKERHUB_PASSWORD" | docker login --username "nerlyss" --password-stdin
+    - echo "$DOCKERHUB_PASSWORD" | docker login --username "$DOCKERHUB_LOGIN" --password-stdin
     - docker push nerlyss411/ynov_lea_ipti_counter_app_img:$
     
 deploy-app-job:
