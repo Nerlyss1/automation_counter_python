@@ -1,24 +1,24 @@
 stages:          
-  - build-image # associer au job build-image-job
-  - publish-image # associer au job push-image-job
-  - deploy-app # associer au job deploy-job
+  - build-image 
+  - publish-image 
+  - deploy-app 
 
-build-image:      
+build-image-job:      
   stage: build-image
   script:
-    - docker build -t counter_app_img .
+    - docker build -t ynov_lea_ipti_counter_app_img .
     - docker images
 
-publish-image:   
+publish-image-job:   
   stage: publish-image
   script:
-    - docker tag counter_app_img nerlyss411/counter_app_img:$CI_COMMIT_SHORT_SHA
+    - docker tag ynov_lea_ipti_counter_app_img nerlyss411/ynov_lea_ipti_counter_app_img:$CI_COMMIT_SHORT_SHA
     - echo "$DOCKERHUB_PASSWORD" | docker login --username "$DOCKERHUB_LOGIN" --password-stdin
-    - docker push nerlyss411/counter_app_img:$
+    - docker push nerlyss411/ynov_lea_ipti_counter_app_img:$
     
-deploy-app:
+deploy-app-job:
   stage: deploy-app
   script:
-    - sshpass -p "$SSH_PASSWORD" ssh nerlyss@192.168.198.143 'docker rm -f counter_app || true && docker run --name counter_app -d -p 8080:80 nerlyss411/counter_app_img:$CI_COMMIT_SHORT_SHA'
+    - sshpass -p "$SSH_PASSWORD" ssh nerlyss@192.168.198.143 'docker rm -f counter_app || true && docker run --name counter_app -d -p 8080:80 nerlyss411/ynov_lea_ipti_counter_app_img:$CI_COMMIT_SHORT_SHA'
   tags:
     - gitlab-runner
