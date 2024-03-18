@@ -14,9 +14,8 @@ publish-image-job:
   stage: publish-image
   script:
     - echo "$DOCKERHUB_PASSWORD" | docker login --username "$DOCKERHUB_LOGIN" --password-stdin
-    - docker push nerlyss411/ynov_lea_ipti_counter_app_img:latest  # Pousse l'image avec le tag 'latest' pour Docker Hub
-    - docker tag ynov_lea_ipti_counter_app_img nerlyss411/ynov_lea_ipti_counter_app_img:$CI_COMMIT_SHORT_SHA  # Tag local avec le commit SHA
-    - docker push nerlyss411/ynov_lea_ipti_counter_app_img:$CI_COMMIT_SHORT_SHA  # Pousse l'image avec le tag du commit SHA
+    - docker tag ynov_lea_ipti_counter_app_img nerlyss411/ynov_lea_ipti_counter_app_img:$CI_COMMIT_SHORT_SHA
+    - docker push nerlyss411/ynov_lea_ipti_counter_app_img:$CI_COMMIT_SHORT_SHA
     
 deploy-app-job:
   stage: deploy-app
