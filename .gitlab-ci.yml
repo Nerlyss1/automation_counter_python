@@ -6,7 +6,7 @@ stages:
 build-image-job:      
   stage: build-image
   script:
-   - docker rm -f ynov_lea_ipti_counter_app_img || true
+    - docker rm -f ynov_lea_ipti_counter_app_img || true
     - docker build -t ynov_lea_ipti_counter_app_img .
     - docker images
 
